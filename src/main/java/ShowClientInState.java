@@ -32,6 +32,7 @@ public class ShowClientInState extends HttpServlet {
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet ShowClient</title>");
+            out.println("<style>table, th, td {border: 1px solid black;}</style>");
             out.println("</head>");
             out.println("<body>");
             try {   // Trouver la valeur du paramètre HTTP customerID
@@ -47,16 +48,24 @@ public class ShowClientInState extends HttpServlet {
                 if (customer == null) {
                     throw new Exception("Client inconnu");
                 }
+                out.println("<table><tr><th>ID</th><th>Name</th><th>Adress</th></tr>");
                 // Afficher les propriétés du client         
                 for(int i=0;i<customer.size();i++){
-                out.printf("Customer n° %d <br> name: %s <br> address: %s",
+               /* out.printf("Customer n° %d <br> name: %s <br> address: %s",
+                    customer.get(i).getCustomerId(),
+                    customer.get(i).getName(),
+                    customer.get(i).getAddressLine1());*/
+                    out.printf("<tr><td>%d</td><td>%s</td><td>%s</td></tr>",
                     customer.get(i).getCustomerId(),
                     customer.get(i).getName(),
                     customer.get(i).getAddressLine1());
                 }
+                out.println("</table>");
+                
             } catch (Exception e) {
                 out.printf("Erreur : %s", e.getMessage());
             }
+            //out.printf("table, th, td {border: 1px solid black;}");
             out.printf("<hr><a href='%s'>Retour au menu</a>", request.getContextPath());
             out.println("</body>");
             out.println("</html>");
